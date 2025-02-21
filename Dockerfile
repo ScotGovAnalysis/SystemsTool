@@ -1,4 +1,4 @@
-FROM "rocker/r-ver:4.2.2"
+FROM "rocker/r-ver:4.4.2"
 
 LABEL maintainer="<Maintainer name>, <Maintainer email>"
 
@@ -23,10 +23,11 @@ RUN apt-get update && apt-get install -y \
 RUN R -e "install.packages(c('shiny'), repos='https://cloud.r-project.org/')"
 
 # install dependencies of the dashboard_app
-RUN R -e "install.packages(c('jsonlite','magrittr','r2d3','readxl','pkgload', repos='https://cloud.r-project.org/')"
+RUN R -e "install.packages(c('jsonlite','magrittr','r2d3','readxl','pkgload','markdown'), repos='https://cloud.r-project.org/')"
 
-RUN R -e "remotes::install_github('ScotGovAnalysis/NZST-Share')"
+COPY NZST.tar.gz .
 
+RUN R -e "install.packages('NZST.tar.gz', repos=NULL, type='source', lib='/usr/local/lib/R/site-library')"
 
 # copy the app to the image
 RUN mkdir /root/<username>
