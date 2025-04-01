@@ -9,7 +9,7 @@ shinyUI(
       tabPanel("App",
                tagList(tags$style(type="text/css", ".shiny-file-input-progress { display: none }")),
                column(6,
-                      titlePanel("Strategy"),
+                      titlePanel("System"),
                       fileInput("network_file", NULL),
                       actionButton("show_example", "Show example map")),
                column(6,
